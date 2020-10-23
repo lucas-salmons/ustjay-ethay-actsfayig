@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 def get_fact():
-    '''scrape random fact gtom unkno.com'''
+    '''scrape random fact from unkno.com'''
     response = requests.get("http://unkno.com")
 
     soup = BeautifulSoup(response.content, "html.parser")
@@ -29,7 +29,9 @@ def get_route(fact):
 
 @app.route('/')
 def home():
-    return get_route(get_fact())
+    '''format the Location url as a link'''
+    url_str = get_route(get_fact())
+    return f'<a href="{url_str}">{url_str}</a>'
 
 
 if __name__ == "__main__":
